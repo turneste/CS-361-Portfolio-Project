@@ -6,11 +6,35 @@
 
 {% block body %}
 
-<table>
-{% for x in data %}
-<tr><td>{{ x.id }}</td></tr>
-{% endfor %}
-</table>
+    <form action='/' method="POST">
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age"><br>
+    
+        <label for="budget">Budget: </label>
+        <input type="number" id="budget" name="budget"><br>
+    
+        <label for="departCity">Departing City: </label>
+        <input type="text" id="departCity" name="departCity"><br>
+    
+        <label for="departDate">Departure Date: </label>
+        <input type="date" id="departDate" name="departDate"><br>
+    
+        <label for="tripLength">Trip Length (Days): </label>
+        <input type="number" id="tripLength" name="tripLength"><br>
+    
+        <h4>Interests:</h4>
+        <label for="hiking">hiking</label>
+        <input type="checkbox" id="hiking" name="hiking" value="hiking"><br>
+    
+        <label for="restaurants">restaurants</label>
+        <input type="checkbox" id="restaurants" name="restaurants" value="restaurants"><br>
+    
+        <label for="museums">museums</label>
+        <input type="checkbox" id="restaurants" name="restaurants" value="restaurants"><br>
+    
+        <label for="music">music</label>
+        <input type="checkbox" id="restaurants" name="restaurants" value="restaurants"><br><br>
 
+        <input type="submit" value="Submit">
 
 {% endblock %}
