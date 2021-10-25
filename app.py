@@ -1,10 +1,16 @@
 from flask import Flask, render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
 import static.script.static as static
+from form import RegForm
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
+bootstrap = Bootstrap(app)
+
+
 
 class Travel_Data(db.Model):
     id = db.Column(db.Integer, primary_key=True)

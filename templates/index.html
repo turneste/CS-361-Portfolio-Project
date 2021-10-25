@@ -1,27 +1,33 @@
 {% extends 'base.html' %}
 
+
 {% block head %}
 
 {% endblock %}
 
 {% block body %}
 
+
+
     <form action='/' method="POST">
-        <label for="age">Age:</label>
-        <input type="text" id="age" name="age"><br>
-    
-        <label for="budget">Budget: </label>
-        <input type="number" id="budget" name="budget"><br>
-    
-        <label for="departCity">Departing City: </label>
-        <input type="text" id="departCity" name="departCity"><br>
-    
-        <label for="departDate">Departure Date: </label>
-        <input type="date" id="departDate" name="departDate"><br>
-    
-        <label for="tripLength">Trip Length (Days): </label>
-        <input type="number" id="tripLength" name="tripLength"><br>
-    
+        <div class="col-lg-4 offset-lg-3">
+
+            <label for="age" class="justify-contet">Age</label><br>
+            <input type="text" class="form-control" id="age" name="age"><br>
+
+            <label for="budget">Budget: </label><br>
+            <input type="number" class="form-control" id="budget" name="budget"><br>
+
+            <label for="departCity">Departing City: </label><br>
+            <input type="text" class="form-control" id="departCity" name="departCity"><br>
+
+            <label for="departDate">Departure Date: </label><br>
+            <input type="date" class="form-control" id="departDate" name="departDate"><br>
+
+            <label for="tripLength">Trip Length (Days): </label><br>
+            <input type="number" class="form-control" id="tripLength" name="tripLength"><br>
+        </div>
+
         <h4>Interests:</h4>
         <label for="hiking">hiking</label>
         <input type="checkbox" id="hiking" name="hiking" value="hiking"><br>
@@ -36,5 +42,9 @@
         <input type="checkbox" id="restaurants" name="restaurants" value="restaurants"><br><br>
 
         <input type="submit" value="Submit">
+
+        </div>
+    </div>
+
 
 {% endblock %}
