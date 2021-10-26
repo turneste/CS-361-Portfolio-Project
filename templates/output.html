@@ -6,47 +6,384 @@
 
 {% block body %}
 
-{% for city in data["cities"] %}
-<div class="city" id="city">
+<script>
+function toggle_display(display){
+    document.getElementById("display-overview").style.display = 'none';
+    document.getElementById("display-flights").style.display = 'none';
+    document.getElementById("display-hotels").style.display = 'none';
+    document.getElementById("display-restaurants").style.display = 'none';
+    document.getElementById("display-statistics").style.display = 'none';
 
-    <div id = "cityName" class="title">
-         <p>{{ city }}</p>
+    document.getElementById(display).style.display = 'block';
+  }
+</script>
+
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/">Back</a>
+    </header>
+  
+  <div class="container-fluid" style="height: 100%;">
+    <div class="row" style="height: 100%;">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="height: 100%;">
+        <div class="position-sticky pt-3" style="height: 100%;">
+          <ul class="nav flex-column" >
+            <li class="nav-item">
+              <a class="nav-link active" onclick="toggle_display('display-overview')" href="#">Overview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" onclick="toggle_display('display-flights')" href="#">Flights</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" onclick="toggle_display('display-hotels')" href="#">Hotels</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" onclick="toggle_display('display-restaurants')" href="#">Restaurants</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="toggle_display('display-statistics')" href="#">Statistics</a>
+            </li>
+            
+          </ul>
+        </div>
+      </nav>
+
+      
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+        <!---------------OVERVIEW--------------->
+        
+        <div id="display-overview">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Overview</h1>
+            </div>
+
+            {% for city in data["cities"] %}
+            <div class="city" id="city">
+
+
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                <div class="col">
+                    <div class="card mb-1 rounded-3 shadow-sm">
+                        <div class="card-header py-1 text-left"><div id = "cityName"><h5>{{ city }}</h5></div></div>
+                        <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div id = "flights">
+                                    <p>Flight information</p>
+                                    <ol>
+                                            <li>{{  data["flights"][city][0] }}</li>
+                                            <li>{{  data["flights"][city][1] }}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id = "hotels">
+                                    <p>Hotel information</p>
+                                    <ol>
+                                            <li>{{  data["hotels"][city][0] }}</li>
+                                            <li>{{  data["hotels"][city][1] }}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id = "restaurant">
+                                    <p>Restaurant information</p>
+                                    <ol>
+                                        <li>{{  data["restaurant"][city][0] }}</li>
+                                        <li>{{  data["restaurant"][city][1] }}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id = "stats">
+                                    <p>Statistics</p>
+                                    <ol>
+                                        <li>{{  data["stats"][0] }}</li>
+                                        <li>{{  data["stats"][1] }}</li>
+                                    </ol>
+                                </div>
+                            
+                            </div>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!---------FLIGHTS----------->
+
+        <div id="display-flights" style="display: none;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Flights</h1>
+            </div>
+
+            {% for city in data["cities"] %}
+            <div class="city" id="city">
+
+
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                <div class="col">
+                    <div class="card mb-1 rounded-3 shadow-sm">
+                        <div class="card-header py-1 text-left"><div id = "cityName"><h5>{{ city }}</h5></div></div>
+                        <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div id = "flights">
+                                    <p>Flight information</p>
+                                    <ol>
+                                            <li>{{  data["flights"][city][0] }}</li>
+                                            <li>{{  data["flights"][city][1] }}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id = "hotels">
+                                    <p>Hotel information</p>
+                                    <ol>
+                                            <li>{{  data["hotels"][city][0] }}</li>
+                                            <li>{{  data["hotels"][city][1] }}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id = "restaurant">
+                                    <p>Restaurant information</p>
+                                    <ol>
+                                        <li>{{  data["restaurant"][city][0] }}</li>
+                                        <li>{{  data["restaurant"][city][1] }}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id = "stats">
+                                    <p>Statistics</p>
+                                    <ol>
+                                        <li>{{  data["stats"][0] }}</li>
+                                        <li>{{  data["stats"][1] }}</li>
+                                    </ol>
+                                </div>
+                            
+                            </div>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% endfor %}
+        </div>
+
+        <!---------Hotels----------->
+
+        <div id="display-hotels" style="display: none;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Hotels</h1>
+            </div>
+
+            {% for city in data["cities"] %}
+            <div class="city" id="city">
+
+
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                <div class="col">
+                    <div class="card mb-1 rounded-3 shadow-sm">
+                        <div class="card-header py-1 text-left"><div id = "cityName"><h5>{{ city }}</h5></div></div>
+                        <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div id = "flights">
+                                    <p>Flight information</p>
+                                    <ol>
+                                            <li>{{  data["flights"][city][0] }}</li>
+                                            <li>{{  data["flights"][city][1] }}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id = "hotels">
+                                    <p>Hotel information</p>
+                                    <ol>
+                                            <li>{{  data["hotels"][city][0] }}</li>
+                                            <li>{{  data["hotels"][city][1] }}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id = "restaurant">
+                                    <p>Restaurant information</p>
+                                    <ol>
+                                        <li>{{  data["restaurant"][city][0] }}</li>
+                                        <li>{{  data["restaurant"][city][1] }}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id = "stats">
+                                    <p>Statistics</p>
+                                    <ol>
+                                        <li>{{  data["stats"][0] }}</li>
+                                        <li>{{  data["stats"][1] }}</li>
+                                    </ol>
+                                </div>
+                            
+                            </div>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% endfor %}
+        </div>
+
+
+
+               <!---------Restaurants----------->
+
+               <div id="display-restaurants" style="display: none;">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Restaurants</h1>
+                </div>
+    
+                {% for city in data["cities"] %}
+                <div class="city" id="city">
+    
+    
+                <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                    <div class="col">
+                        <div class="card mb-1 rounded-3 shadow-sm">
+                            <div class="card-header py-1 text-left"><div id = "cityName"><h5>{{ city }}</h5></div></div>
+                            <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div id = "flights">
+                                        <p>Flight information</p>
+                                        <ol>
+                                                <li>{{  data["flights"][city][0] }}</li>
+                                                <li>{{  data["flights"][city][1] }}</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div id = "hotels">
+                                        <p>Hotel information</p>
+                                        <ol>
+                                                <li>{{  data["hotels"][city][0] }}</li>
+                                                <li>{{  data["hotels"][city][1] }}</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div id = "restaurant">
+                                        <p>Restaurant information</p>
+                                        <ol>
+                                            <li>{{  data["restaurant"][city][0] }}</li>
+                                            <li>{{  data["restaurant"][city][1] }}</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div id = "stats">
+                                        <p>Statistics</p>
+                                        <ol>
+                                            <li>{{  data["stats"][0] }}</li>
+                                            <li>{{  data["stats"][1] }}</li>
+                                        </ol>
+                                    </div>
+                                
+                                </div>
+                                </div>
+                            </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+    
+                {% endfor %}
+            </div>
+
+        <!---------Stats----------->
+
+        <div id="display-statistics" style="display: none;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Stats</h1>
+            </div>
+
+            {% for city in data["cities"] %}
+            <div class="city" id="city">
+
+
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                <div class="col">
+                    <div class="card mb-1 rounded-3 shadow-sm">
+                        <div class="card-header py-1 text-left"><div id = "cityName"><h5>{{ city }}</h5></div></div>
+                        <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div id = "flights">
+                                    <p>Flight information</p>
+                                    <ol>
+                                            <li>{{  data["flights"][city][0] }}</li>
+                                            <li>{{  data["flights"][city][1] }}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id = "hotels">
+                                    <p>Hotel information</p>
+                                    <ol>
+                                            <li>{{  data["hotels"][city][0] }}</li>
+                                            <li>{{  data["hotels"][city][1] }}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id = "restaurant">
+                                    <p>Restaurant information</p>
+                                    <ol>
+                                        <li>{{  data["restaurant"][city][0] }}</li>
+                                        <li>{{  data["restaurant"][city][1] }}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id = "stats">
+                                    <p>Statistics</p>
+                                    <ol>
+                                        <li>{{  data["stats"][0] }}</li>
+                                        <li>{{  data["stats"][1] }}</li>
+                                    </ol>
+                                </div>
+                            
+                            </div>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% endfor %}
+        </div>
+
+    </main>
+
+
     </div>
-   
-    <div id = "flights" class="info">
-        <p>Flight information</p>
-        <ol>
-                <li>{{  data["flights"][city][0] }}</li>
-                <li>{{  data["flights"][city][1] }}</li>
-        </ol>
-    </div>
-
-    <div id = "hotels" class="info">
-        <p>Hotel information</p>
-        <ol>
-                <li>{{  data["hotels"][city][0] }}</li>
-                <li>{{  data["hotels"][city][1] }}</li>
-        </ol>
-       
-    </div>
-        <div id = "restaurant" class="info">
-        <p>Restaurant information</p>
-        <ol>
-            <li>{{  data["restaurant"][city][0] }}</li>
-            <li>{{  data["restaurant"][city][1] }}</li>
-        </ol>
-    </div>
-
-    <div id = "stats" class="info">
-        <p>Statistics</p>
-        <ol>
-            <li>{{  data["stats"][0] }}</li>
-            <li>{{  data["stats"][1] }}</li>
-        </ol>
-    </div>
-
-</div>
-
-{% endfor %}
-
+  </div>
+  
 {% endblock %}

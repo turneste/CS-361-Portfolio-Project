@@ -2,7 +2,6 @@ from flask import Flask, render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 import static.script.static as static
-from form import RegForm
 import os
 
 app = Flask(__name__)

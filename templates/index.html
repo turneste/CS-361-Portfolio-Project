@@ -28,23 +28,33 @@
             <input type="number" class="form-control" id="tripLength" name="tripLength"><br>
         </div>
 
-        <h4>Interests:</h4>
-        <label for="hiking">hiking</label>
-        <input type="checkbox" id="hiking" name="hiking" value="hiking"><br>
-    
-        <label for="restaurants">restaurants</label>
-        <input type="checkbox" id="restaurants" name="restaurants" value="restaurants"><br>
-    
-        <label for="museums">museums</label>
-        <input type="checkbox" id="restaurants" name="restaurants" value="restaurants"><br>
-    
-        <label for="music">music</label>
-        <input type="checkbox" id="restaurants" name="restaurants" value="restaurants"><br><br>
+        
+        <div class="col-lg-4 offset-lg-3">
+            <div class = "form-check">
+                <input type="checkbox" class="form-check-input" id="hiking" value="" name="hiking">
+                <label for="hiking" class="form-check-label">hiking</label>
+            </div>
+        
+            <div class = "form-check">
+                <input type="checkbox" class="form-check-input" id="restaurants" value="" name="restaurants">
+                <label for="restaurants" class="form-check-label">restaurants</label>
+            </div>
 
-        <input type="submit" value="Submit">
+            <div class = "form-check">
+                <input type="checkbox" class="form-check-input" id="museums" value="" name="museums">
+                <label for="museums" class="form-check-label">museums</label>
+            </div>
 
+            <div class = "form-check">
+                <input type="checkbox" class="form-check-input" id="music" value="" name="music">
+                <label for="music" class="form-check-label">music</label>
+            </div>
+
+            <input type="submit" value="Submit">
+            
         </div>
-    </div>
+
+    </form>
 
 
 {% endblock %}

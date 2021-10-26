@@ -27,3 +27,4 @@ def restaurant_finder(city):
         restaurant_name = "Flight " + str(num)
         restaurant_list.append(restaurant_name)
     return restaurant_list
+
