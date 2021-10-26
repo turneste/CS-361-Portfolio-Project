@@ -2,7 +2,6 @@
 
 {% block head %}
 
-
 {% endblock %}
 
 {% block body %}
@@ -29,21 +28,16 @@
                 <div class="card-header">City Name</div>
                 <div class="card-body">
                 <div class="row ">
-
                     <div class="col text-center">
                         <div id = "flights">
                             <p>Flight information</p>
                             <ul class="list-group-flush text-left">
                                     <li class="list-group-item">{{  data["flights"][city]["1"]["name"] }}</li>
                                     <li class="list-group-item">{{  data["flights"][city]["2"]["name"] }}</li>
-                                    
                             </ul>
-                            <button onclick="test('flight{{city}}')" onmouseover="hover('on', 'hovFlight{{city}}')" onmouseout="hover('off', 'hovFlight{{city}}')">More flights</button>
-                            <span id="hovFlight{{city}}" style="display:none">Display more information on up to 5 flights</span>
+                            <button>More flights</button>
                         </div>
                     </div>
-
-
                     <div class="col text-center">
                         <div id = "hotels">
                             <p>Hotel information</p>
@@ -51,11 +45,9 @@
                                     <li class="list-group-item">{{  data["hotels"][city]["1"]["name"] }}</li>
                                     <li class="list-group-item">{{  data["hotels"][city]["2"]["name"] }}</li>
                             </ul>
-                            <button onclick="test('hotel{{city}}')" onmouseover="hover('on', 'hovHotel{{city}}')" onmouseout="hover('off', 'hovHotel{{city}}')">More flights</button>
-                            <span id="hovHotel{{city}}" style="display:none">Display more information on up to 5 hotels</span>
+                            <button>More Hotels</button>
                         </div>
                     </div>
-
                     <div class="col text-center">
                         <div id = "restaurant">
                             <p>Restaurant information</p>
@@ -63,11 +55,9 @@
                                 <li class="list-group-item">{{  data["restaurant"][city]["1"]["name"] }}</li>
                                 <li class="list-group-item">{{  data["restaurant"][city]["2"]["name"] }}</li>
                             </ul>
-                            <button onclick="test('restaurant{{city}}')" onmouseover="hover('on', 'hovRestaurant{{city}}')" onmouseout="hover('off', 'hovRestaurant{{city}}')">More flights</button>
-                            <span id="hovRestaurant{{city}}" style="display:none">Display more information on up to 5 restaurants</span>
+                            <button>More Restaurants</button>
                         </div>
                     </div>
-
                     <div class="col text-center">
                         <div id = "stats">
                             <p>Statistics</p>
@@ -75,65 +65,15 @@
                                 <li class="list-group-item">{{  data["stats"][0] }}</li>
                                 <li class="list-group-item">{{  data["stats"][1] }}</li>
                             </ul>
-                            <button onclick="test('stats{{city}}')" onmouseover="hover('on', 'hovStats{{city}}')" onmouseout="hover('off', 'hovStats{{city}}')">More flights</button>
-                            <span id="hovStats{{city}}" style="display:none">Display more information on up to 5 stats</span>
+                            <button>More Stats</button>
                         </div>
+                    
                     </div>
                 </div>
-            </div>
-        
-                <div id="flight{{city}}" style="display: none;">
-                    <div class="card card-body">
-                      More flight information
-                    </div>
                 </div>
-
-                <div id="hotel{{city}}" style="display: none;">
-                    <div class="card card-body">
-                      More hotel information
-                    </div>
-                </div>
-
-                <div id="restaurant{{city}}" style="display: none;">
-                    <div class="card card-body">
-                      More restaurant information
-                    </div>
-                </div>
-
-                <div id="stats{{city}}" style="display: none;">
-                    <div class="card card-body">
-                      More statistics information
-                    </div>
-                </div>
-
-
-
             </div>
         </div></div>
     </main>
 {% endfor %}
 </div>
-
-<script type="text/javascript">
-    function test(divId){
-        var content = document.getElementById(divId);
-
-            if (content.style.display === "block") {
-            content.style.display = "none";
-            } else {
-            content.style.display = "block";
-            }
-        }
-
-    function hover(position, divId) {
-                        var hov = document.getElementById(divId);
-                        if (position=="on") {
-                        hov.style.display = "block";
-                        } else if (position=="off") {
-                        hov.style.display = "none";
-                        }
-                    }
-</script>
-
 {% endblock %}
-

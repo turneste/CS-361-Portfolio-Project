@@ -8,23 +8,33 @@ def city_finder(age, budget):
     return [cities, stats]
 
 def hotel_finder(city):
-    hotel_list = []
-    for num in range(1,3):
-        hotel_name = " Hotel " + str(num)
-        hotel_list.append(hotel_name)
+    hotel_list = dict()
+    for num in range(1,6):
+        hotel_list[str(num)] = {
+            "name": "Hotel "+str(num),
+            "price": "price here",
+            "location": "location here"
+        }
     return hotel_list
 
 def flight_finder(city):
-    flight_list = []
-    for num in range(1,3):
-        flight_name = "Flight " + str(num)
-        flight_list.append(flight_name)
+    flight_list = dict()
+    for num in range(1,6):
+        flight_list[str(num)] = {
+            "name": "Flight "+str(num),
+            "price": "price here",
+            "location": "location here"
+        }
     return flight_list
 
 def restaurant_finder(city):
-    restaurant_list = []
-    for num in range(1,3):
-        restaurant_name = "Flight " + str(num)
-        restaurant_list.append(restaurant_name)
+    restaurant_list = dict()
+    for num in range(1,6):
+        restaurant_list[str(num)] = {
+            "name": "Restaurant "+str(num),
+            "price": "price here",
+            "location": "location here"
+        }
+
     return restaurant_list
 
