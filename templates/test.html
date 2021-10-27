@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/">Back</a>
+</header>
+
+
+
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Overview</h1>
+    </div>
+
+
+
+        {% for city in data["cities"] %}
+        <main class="col-md-12 center">
+        <div class="row"><div class="col">
+            <div class="card mb-1 rounded-3 shadow-sm">
+                <div class="card-header">City Name</div>
+                <div class="card-body">
+                <div class="row ">
+                    <div class="col text-center">
+                        <div id = "flights">
+                            <p>Flight information</p>
+                            <ul class="list-group-flush text-left">
+                                    <li class="list-group-item">{{  data["flights"][city]["1"]["name"] }}</li>
+                                    <li class="list-group-item">{{  data["flights"][city]["2"]["name"] }}</li>
+                            </ul>
+                            <button>More flights</button>
+                        </div>
+                    </div>
+                    <div class="col text-center">
+                        <div id = "hotels">
+                            <p>Hotel information</p>
+                            <ul class="list-group-flush text-left">
+                                    <li class="list-group-item">{{  data["hotels"][city]["1"]["name"] }}</li>
+                                    <li class="list-group-item">{{  data["hotels"][city]["2"]["name"] }}</li>
+                            </ul>
+                            <button>More Hotels</button>
+                        </div>
+                    </div>
+                    <div class="col text-center">
+                        <div id = "restaurant">
+                            <p>Restaurant information</p>
+                            <ul class="list-group-flush text-left">
+                                <li class="list-group-item">{{  data["restaurant"][city]["1"]["name"] }}</li>
+                                <li class="list-group-item">{{  data["restaurant"][city]["2"]["name"] }}</li>
+                            </ul>
+                            <button>More Restaurants</button>
+                        </div>
+                    </div>
+                    <div class="col text-center">
+                        <div id = "stats">
+                            <p>Statistics</p>
+                            <ul class="list-group-flush text-left">
+                                <li class="list-group-item">{{  data["stats"][0] }}</li>
+                                <li class="list-group-item">{{  data["stats"][1] }}</li>
+                            </ul>
+                            <button>More Stats</button>
+                        </div>
+                    
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div></div>
+    </main>
+{% endfor %}
+</div>
+{% endblock %}
