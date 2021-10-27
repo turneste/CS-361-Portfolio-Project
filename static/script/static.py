@@ -1,7 +1,13 @@
 def city_finder(age, budget):
-    print(age, budget)
+    """City matching algorithm"""
     stat1 = "Stat 1"
     stat2 = "Stat 2"
+
+
+
+
+
+
 
     stats = [stat1, stat2]
     cities = ["City 1", "City 2", "City 3"]
