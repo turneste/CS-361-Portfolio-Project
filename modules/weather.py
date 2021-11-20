@@ -3,8 +3,6 @@ import requests
 
 
 def check_weather(city, country, outdoor, duration):
-    return True
-
     base_url = "http://flip3.engr.oregonstate.edu:44643/getWeather?"
     city_query = "city=" + city
     country_query = "&country=" + country

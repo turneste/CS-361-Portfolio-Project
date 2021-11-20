@@ -37,8 +37,7 @@
                                     <li class="list-group-item">Departing flight {{  data["flights"]["depart"][city]["1"]["airline_name"] }} {{  data["flights"]["depart"][city]["1"]["price"] }}</li>
                                     <li class="list-group-item">Returning flight {{  data["flights"]["return"][city]["1"]["airline_name"] }} {{  data["flights"]["return"][city]["1"]["price"] }}</li>
                             </ul>
-                            <button onclick="test('flight{{city}}')" onmouseover="hover('on', 'hovFlight{{city}}')" onmouseout="hover('off', 'hovFlight{{city}}')">More flights</button>
-                            <span id="hovFlight{{city}}" style="display:none">Display more information on up to 5 flights</span>
+
                         </div>
                     </div>
 
@@ -50,8 +49,10 @@
                                     <li class="list-group-item">{{  data["hotels"][city][0]["name"] }} {{  data["hotels"][city][0]["price"] }}</li>
                                     <li class="list-group-item">{{  data["hotels"][city][1]["name"] }} {{  data["hotels"][city][1]["price"] }}</li>
                             </ul>
-                            <button onclick="test('hotel{{city}}')" onmouseover="hover('on', 'hovHotel{{city}}')" onmouseout="hover('off', 'hovHotel{{city}}')">More flights</button>
-                            <span id="hovHotel{{city}}" style="display:none">Display more information on up to 5 hotels</span>
+                            <button onclick="test('hotel{{city}}', 'restaurant{{city}}')"
+                                    onmouseover="hover('on', 'hovHotel{{city}}')"
+                                    onmouseout="hover('off', 'hovHotel{{city}}')">More hotels</button>
+                            <span id="hovHotel{{city}}" style="color:white; display:block">Display more information on up to 5 hotels</span>
                         </div>
                     </div>
 
@@ -62,8 +63,10 @@
                                 <li class="list-group-item">{{  data["restaurant"][city][0]["name"] }} {{ data["restaurant"][city][0]["price"] }}</li>
                                 <li class="list-group-item">{{  data["restaurant"][city][1]["name"] }} {{ data["restaurant"][city][1]["price"] }}</li>
                             </ul>
-                            <button onclick="test('restaurant{{city}}')" onmouseover="hover('on', 'hovRestaurant{{city}}')" onmouseout="hover('off', 'hovRestaurant{{city}}')">More flights</button>
-                            <span id="hovRestaurant{{city}}" style="display:none">Display more information on up to 5 restaurants</span>
+                            <button onclick="test('restaurant{{city}}', 'hotel{{city}}')"
+                                    onmouseover="hover('on', 'hovRestaurant{{city}}')"
+                                    onmouseout="hover('off', 'hovRestaurant{{city}}')">More restaurants</button>
+                            <span id="hovRestaurant{{city}}" style="color:white; display:block">Display more information on up to 5 restaurants</span>
                         </div>
                     </div>
 
@@ -71,40 +74,33 @@
                         <div id = "stats">
                             <p>Statistics</p>
                             <ul class="list-group-flush text-left">
-
                                 <li class="list-group-item">{{ city }} is a {{  data["match_stats"][city] }}% match</li>
                                 <li class="list-group-item">You send {{ data["history_stats"][city] }}% of travelers to {{ city }}</li>
-
-
                             </ul>
-                            <button onclick="test('stats{{city}}')" onmouseover="hover('on', 'hovStats{{city}}')" onmouseout="hover('off', 'hovStats{{city}}')">More flights</button>
-                            <span id="hovStats{{city}}" style="display:none">Display more information on up to 5 stats</span>
+
                         </div>
                     </div>
                 </div>
             </div>
-        
-                <div id="flight{{city}}" style="display: none;">
-                    <div class="card card-body">
-                      More flight information
-                    </div>
-                </div>
+
 
                 <div id="hotel{{city}}" style="display: none;">
                     <div class="card card-body">
                       More hotel information
+                        <ul class="list-group-flush text-left">
+                            {% for hotel in data["hotels"][city] %}
+                                    <li class="list-group-item">{{  hotel["name"] }} {{  hotel["price"] }}</li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
 
                 <div id="restaurant{{city}}" style="display: none;">
                     <div class="card card-body">
                       More restaurant information
-                    </div>
-                </div>
-
-                <div id="stats{{city}}" style="display: none;">
-                    <div class="card card-body">
-                      More statistics information
+                            {% for rest in data["restaurant"][city] %}
+                                    <li class="list-group-item">{{  rest["name"] }} {{  rest["price"] }}</li>
+                            {% endfor %}
                     </div>
                 </div>
 
@@ -116,8 +112,9 @@
 </div>
 
 <script type="text/javascript">
-    function test(divId){
+    function test(divId, divClose1){
         var content = document.getElementById(divId);
+        document.getElementById(divClose1).style.display = "none";
 
             if (content.style.display === "block") {
             content.style.display = "none";
@@ -129,9 +126,9 @@
     function hover(position, divId) {
                         var hov = document.getElementById(divId);
                         if (position=="on") {
-                        hov.style.display = "block";
+                        hov.style.color = "black";
                         } else if (position=="off") {
-                        hov.style.display = "none";
+                        hov.style.color = "white";
                         }
                     }
 </script>

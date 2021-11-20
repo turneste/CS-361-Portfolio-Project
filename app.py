@@ -85,15 +85,9 @@ def output_page():
     flight_list = {"depart": dict(), "return": dict()}
 
     for city in output_data["cities"]:
-
-        """
         flight_list["depart"][str(city)] = flights.flight_search("PIT", city, depart_date, 1)
         flight_list["return"][str(city)] = flights.flight_search(city, "PIT", return_date, 1)
-        """
-        # stop calls to debug
 
-        flight_list["depart"][str(city)] = {"1":{"airline_name":"debug", "price":"debug"}}
-        flight_list["return"][str(city)] = {"1":{"airline_name":"debug", "price":"debug"}}
 
     output_data["flights"] = flight_list
 

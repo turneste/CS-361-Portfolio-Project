@@ -47,7 +47,7 @@ def restaurant_search(city):
             payload.append(rest_data)
 
         rest_num += 1
-        if count > 5:
+        if count > 11:
             break
 
     return json.dumps(payload)

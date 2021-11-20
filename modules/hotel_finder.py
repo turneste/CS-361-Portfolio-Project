@@ -48,7 +48,7 @@ def hotel_search(city):
             payload.append(hotel_data)
 
         hotel_num += 1
-        if count > 5:
+        if count > 11:
             break
 
     return json.dumps(payload)

@@ -66,7 +66,7 @@ class Flights:
             }
 
             count += 1
-            if count > 4:
+            if count > 11:
                 break
 
         return flight_list
