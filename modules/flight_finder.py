@@ -1,66 +1,28 @@
-import requests, json, csv
-
-from requests.api import get
+from amadeus import Client, ResponseError
+from amadeus import Location
+import csv, json, time
 
 class Flights:
     def __init__(self):
-        self._token = self.get_token()
         self._iata_dict = self.import_data()
+        self.amadeus = Client(
+            client_id='2jYFWy2lwS0uSozHuSAng4AoW2MegMM2',
+            client_secret='5Vcc9CKogcI39b7N'
+        )
 
     def import_data(self):
         file = open("modules\data\iata.json")
         data = json.load(file)
         return data
 
-    def get_token(self):
-        base_url = "https://test.api.amadeus.com/v1/security/oauth2/token"
+    def find_iata_by_city(self, city):
+        response = self.amadeus.reference_data.locations.get(keyword=city, subType=Location.ANY)
+        return response.data[0]["iataCode"]
 
-        params = {
-            "grant_type": "client_credentials",
-            "client_id": "2jYFWy2lwS0uSozHuSAng4AoW2MegMM2",
-            "client_secret": "5Vcc9CKogcI39b7N"
-        }
-
-        header = {"Content-Type" : "application/x-www-form-urlencoded"}
-        response = requests.post(base_url, data=params, headers=header)
-        data = response.json()
-        return data["access_token"]
-
-    def flight_finder(self, departCity, destCity, date, adults=1):
-
-        departCode = departCity
-        arriveCode = destCity
-        departDate = date
-        adults = adults
-
-        #key = get_token()
-
-        url = "https://test.api.amadeus.com/v2/shopping/flight-offers?"
-
-        try:
-            header = {"Authorization": "Bearer " + self._token}
-            print(header)
-        except:
-            self._token = self.get_token()
-            header = {"Authorization": "Bearer " + self._token}
-
-        params = {
-            "originLocationCode": departCode,
-            "destinationLocationCode": arriveCode,
-            "departureDate": departDate,
-            "adults": 1,
-            "currencyCode": "USD",
-            "max": 5,
-            "includedAirlineCodes": "UA"
-        }
-
-        response = requests.get(url, params=params, headers=header)
-
-        data = response.json()
-
+    def flight_data_format(self, data):
         count = 1
         flight_list = dict()
-        for flight in data["data"]:
+        for flight in data:
 
             segments = []
             for segment in flight["itineraries"][0]["segments"]:
@@ -78,16 +40,45 @@ class Flights:
 
             flight_list[str(count)] = {
                 "price": price,
-                "segments": segments
+                "segments": segments,
+                "airline_name": airline_name
             }
 
             count += 1
             if count > 4:
                 break
 
-        print(flight_list)
+        return flight_list
+
+
+    def flight_search(self, departCity, destCity, date, adults=1):
+
+        start = time.perf_counter()
+
+        deptCode = self.find_iata_by_city(departCity)
+        destCode = self.find_iata_by_city(destCity)
+        departDate = date
+        adults = adults
+
+        response = self.amadeus.shopping.flight_offers_search.get(
+            originLocationCode = deptCode,
+            destinationLocationCode = destCode,
+            departureDate=departDate,
+            adults=1,
+            max = 3,
+            currencyCode = 'USD',
+            )
+
+        data = response.data
+        print(data)
+
+        end = time.perf_counter()
+        print("Time elapsed:", end-start)
+
+        flight_list = self.flight_data_format(data)
+
         return flight_list
 
 if __name__ == "__main__":
     flights = Flights()
-    flights.flight_finder("PIT", "MSY", "2022-03-06", 1)
+    print(flights.flight_search("PIT", "MSY", "2022-03-06", 1))

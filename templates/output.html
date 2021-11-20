@@ -34,8 +34,8 @@
                         <div id = "flights">
                             <p>Flight information</p>
                             <ul class="list-group-flush text-left">
-                                    <li class="list-group-item">Price option 1 {{  data["flights"][city]["1"]["price"] }}</li>
-                                    <li class="list-group-item">Price option 2 {{  data["flights"][city]["2"]["price"] }}</li>
+                                    <li class="list-group-item">Departing flight {{  data["flights"]["depart"][city]["1"]["airline_name"] }} {{  data["flights"]["depart"][city]["1"]["price"] }}</li>
+                                    <li class="list-group-item">Returning flight {{  data["flights"]["return"][city]["1"]["airline_name"] }} {{  data["flights"]["return"][city]["1"]["price"] }}</li>
                                     
                             </ul>
                             <button onclick="test('flight{{city}}')" onmouseover="hover('on', 'hovFlight{{city}}')" onmouseout="hover('off', 'hovFlight{{city}}')">More flights</button>
@@ -48,8 +48,8 @@
                         <div id = "hotels">
                             <p>Hotel information</p>
                             <ul class="list-group-flush text-left">
-                                    <li class="list-group-item">{{  data["hotels"][city]["1"]["name"] }}</li>
-                                    <li class="list-group-item">{{  data["hotels"][city]["2"]["name"] }}</li>
+                                    <li class="list-group-item">{{  data["hotels"][city][0]["name"] }} {{  data["hotels"][city][0]["price"] }}</li>
+                                    <li class="list-group-item">{{  data["hotels"][city][1]["name"] }} {{  data["hotels"][city][1]["price"] }}</li>
                             </ul>
                             <button onclick="test('hotel{{city}}')" onmouseover="hover('on', 'hovHotel{{city}}')" onmouseout="hover('off', 'hovHotel{{city}}')">More flights</button>
                             <span id="hovHotel{{city}}" style="display:none">Display more information on up to 5 hotels</span>
@@ -60,8 +60,8 @@
                         <div id = "restaurant">
                             <p>Restaurant information</p>
                             <ul class="list-group-flush text-left">
-                                <li class="list-group-item">{{  data["restaurant"][city]["1"]["name"] }}</li>
-                                <li class="list-group-item">{{  data["restaurant"][city]["2"]["name"] }}</li>
+                                <li class="list-group-item">{{  data["restaurant"][city][0]["name"] }} {{ data["restaurant"][city][0]["price"] }}</li>
+                                <li class="list-group-item">{{  data["restaurant"][city][1]["name"] }} {{ data["restaurant"][city][1]["price"] }}</li>
                             </ul>
                             <button onclick="test('restaurant{{city}}')" onmouseover="hover('on', 'hovRestaurant{{city}}')" onmouseout="hover('off', 'hovRestaurant{{city}}')">More flights</button>
                             <span id="hovRestaurant{{city}}" style="display:none">Display more information on up to 5 restaurants</span>
@@ -105,8 +105,6 @@
                       More statistics information
                     </div>
                 </div>
-
-
 
             </div>
         </div></div>
