@@ -1,9 +1,14 @@
-from amadeus import Client, ResponseError
+from amadeus import Client
 from amadeus import Location
-import csv, json, time
+import json
+
 
 class Flights:
     def __init__(self):
+        """
+        -Create dictionary for converting iata codes to airline names
+        -amadeus class is a Python library for Amadeus API calls
+        """
         self._iata_dict = self.import_data()
         self.amadeus = Client(
             client_id='2jYFWy2lwS0uSozHuSAng4AoW2MegMM2',
@@ -11,25 +16,41 @@ class Flights:
         )
 
     def import_data(self):
+        """
+        Convert iata json file to readable format
+        """
         file = open("modules\data\iata.json")
         data = json.load(file)
         return data
 
     def find_iata_by_city(self, city):
+        """
+        city: Any city in the United States
+        returns: Iata code for largest airport
+        """
         response = self.amadeus.reference_data.locations.get(keyword=city, subType=Location.ANY)
         return response.data[0]["iataCode"]
 
-    def flight_data_format(self, data):
+    def flight_data_format(self, flight_search_data):
+        """
+        flight_search_data: All possible flight options returned by flight search
+        returns: 3 flight options in format output_page() is expecting
+        """
         count = 1
         flight_list = dict()
-        for flight in data:
 
+        for flight in flight_search_data:  # iterate through flight options until 3 are found
+
+            # Connecting flight information
             segments = []
             for segment in flight["itineraries"][0]["segments"]:
+
+                # Convert iata code given by flight_search() to airline names
                 depCity = segment["departure"]["iataCode"]
                 arrCity = segment["arrival"]["iataCode"]
                 airline = segment["carrierCode"]
                 airline_name = self._iata_dict[airline]
+
                 segments.append({
                     "depCity": depCity,
                     "arrCity": arrCity,
@@ -50,30 +71,28 @@ class Flights:
 
         return flight_list
 
+    def flight_search(self, depart_city, dest_city, date, adults=1):
+        """
+        depart_city: City traveler is departing from
+        dest_city: City traveler is departing to
+        date: Departure date
+        adults: Number of travelers
+        """
 
-    def flight_search(self, departCity, destCity, date, adults=1):
-
-        start = time.perf_counter()
-
-        deptCode = self.find_iata_by_city(departCity)
-        destCode = self.find_iata_by_city(destCity)
-        departDate = date
-        adults = adults
+        # Find iata code from city name, required for amadeus search
+        dept_code = self.find_iata_by_city(depart_city)
+        dest_code = self.find_iata_by_city(dest_city)
 
         response = self.amadeus.shopping.flight_offers_search.get(
-            originLocationCode = deptCode,
-            destinationLocationCode = destCode,
-            departureDate=departDate,
+            originLocationCode=dept_code,
+            destinationLocationCode=dest_code,
+            departureDate=date,
             adults=1,
-            max = 3,
-            currencyCode = 'USD',
+            max=3,
+            currencyCode='USD',
             )
 
         data = response.data
-        print(data)
-
-        end = time.perf_counter()
-        print("Time elapsed:", end-start)
 
         flight_list = self.flight_data_format(data)
 

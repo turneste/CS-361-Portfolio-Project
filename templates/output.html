@@ -36,7 +36,6 @@
                             <ul class="list-group-flush text-left">
                                     <li class="list-group-item">Departing flight {{  data["flights"]["depart"][city]["1"]["airline_name"] }} {{  data["flights"]["depart"][city]["1"]["price"] }}</li>
                                     <li class="list-group-item">Returning flight {{  data["flights"]["return"][city]["1"]["airline_name"] }} {{  data["flights"]["return"][city]["1"]["price"] }}</li>
-                                    
                             </ul>
                             <button onclick="test('flight{{city}}')" onmouseover="hover('on', 'hovFlight{{city}}')" onmouseout="hover('off', 'hovFlight{{city}}')">More flights</button>
                             <span id="hovFlight{{city}}" style="display:none">Display more information on up to 5 flights</span>
@@ -72,8 +71,11 @@
                         <div id = "stats">
                             <p>Statistics</p>
                             <ul class="list-group-flush text-left">
-                                <li class="list-group-item">{{  data["stats"][0] }}</li>
-                                <li class="list-group-item">{{  data["stats"][1] }}</li>
+
+                                <li class="list-group-item">{{ city }} is a {{  data["match_stats"][city] }}% match</li>
+                                <li class="list-group-item">You send {{ data["history_stats"][city] }}% of travelers to {{ city }}</li>
+
+
                             </ul>
                             <button onclick="test('stats{{city}}')" onmouseover="hover('on', 'hovStats{{city}}')" onmouseout="hover('off', 'hovStats{{city}}')">More flights</button>
                             <span id="hovStats{{city}}" style="display:none">Display more information on up to 5 stats</span>
@@ -109,6 +111,7 @@
             </div>
         </div></div>
     </main>
+
 {% endfor %}
 </div>
 

@@ -1,17 +1,8 @@
-{% extends 'base.html' %}
-
-
-{% block head %}
-
-{% endblock %}
-
-{% block body %}
-
-
+{% extends 'base.html' %}{% block head %}{% endblock %}{% block body %}
 
     <form action='/' method="POST">
-        <div class="col-lg-4 offset-lg-3">
 
+        <div class="col-lg-4 offset-lg-3">
             <label for="age" class="justify-contet">Age</label><br>
             <input type="text" class="form-control" id="age" name="age"><br>
 
@@ -27,22 +18,19 @@
             <label for="tripLength">Trip Length (Days): </label><br>
             <input type="number" class="form-control" id="tripLength" name="tripLength" requried><br>
         </div>
-
         
         <div class="col-lg-4 offset-lg-3">
             {% for interest in data %}
                 <div class = "form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="{{ interest }}" value="{{ interest }}" name="{{ interest }}">
+                    <input type="checkbox" class="form-check-input" id="{{ interest }}" value="{{ interest }}" name="active">
                     <label for="{{ interest }}" class="form-check-label">{{ interest }}</label>
                 </div>
             {% endfor %}
-
 
             <br><input type="submit" value="Submit">
         </div>
         </div>
 
     </form>
-
 
 {% endblock %}
