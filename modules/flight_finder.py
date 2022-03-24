@@ -82,6 +82,7 @@ class Flights:
         # Find iata code from city name, required for amadeus search
         dept_code = self.find_iata_by_city(depart_city)
         dest_code = self.find_iata_by_city(dest_city)
+        print(dept_code, dest_code, date)
 
         response = self.amadeus.shopping.flight_offers_search.get(
             originLocationCode=dept_code,

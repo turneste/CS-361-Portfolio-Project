@@ -11,7 +11,6 @@ app = Flask(__name__)
 historical_data = HistoricalData('modules\data\data.csv')
 flights = Flights()
 
-
 @app.route('/', methods=['GET'])
 def input_page():
     """
